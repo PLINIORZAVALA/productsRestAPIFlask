@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from products import products  # Importa la lista de productos
 
 app = Flask(__name__)
@@ -28,6 +28,7 @@ def getProduct(product_name):
 # Ruta con metodo POST para agregar productos
 @app.route('/products', methods = ['POST'])
 def addProduct():
+    print(request.json)
     return 'received'
 
 if __name__ == "__main__":
