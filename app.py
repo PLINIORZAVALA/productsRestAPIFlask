@@ -10,7 +10,7 @@ def ping():
 # Ruta para obtener todos los productos
 @app.route('/products', methods=['GET'])
 def get_products():
-    return jsonify(products)
+    return jsonify({"message": "pong!"})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
