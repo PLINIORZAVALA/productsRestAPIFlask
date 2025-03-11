@@ -15,7 +15,7 @@ def get_json():
 # Ruta para obtener todos los productos
 @app.route('/products', methods=['GET'])
 def get_products():
-    return jsonify(products)
+    return jsonify({"products": products})#objeto con lista de productos
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
