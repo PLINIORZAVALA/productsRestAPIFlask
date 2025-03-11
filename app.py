@@ -102,3 +102,7 @@ def deleteProduct(product_name):
 if __name__ == "__main__":
     # Inicia la aplicación en modo debug en el puerto 5000
     app.run(debug=True, port=5000)
+
+"""
+LINK VIDIO YOUTUBE: https://youtu.be/Esdj9wlBOaI?si=wBPh8BXrtfp-SwbS
+"""
