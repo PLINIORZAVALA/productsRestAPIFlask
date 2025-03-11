@@ -28,8 +28,13 @@ def getProduct(product_name):
 # Ruta con metodo POST para agregar productos
 @app.route('/products', methods = ['POST'])
 def addProduct():
-    print(request.json)
-    return 'received'
+    new_product = {
+        "name": request.json['name'],
+        "price": request.json['price'],
+        "quantity": request.json['quantity']
+    }
+    products.append(new_product)
+    return jsonify({"message": "Product Added Succesfully", "products": products})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
