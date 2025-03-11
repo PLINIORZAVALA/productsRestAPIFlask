@@ -39,29 +39,31 @@ def addProduct():
 # Ruta para actualizar los datos de un producto
 @app.route('/products/<string:product_name>', methods=['PUT'])
 def editProduct(product_name):
-    # Busca el producto en la lista `products`
     product_found = [product for product in products if product['name'] == product_name]
-
-    # Si no se encuentra el producto, devuelve un error 404
     if not product_found:
         return jsonify({"message": "Product Not Found"}), 404
-
-    # Obtén el producto encontrado
     product = product_found[0]
-
-    # Valida que los campos necesarios estén en el JSON de la solicitud
     if not all(key in request.json for key in ['name', 'price', 'quantity']):
         return jsonify({"message": "Missing required fields (name, price, quantity)"}), 400
-
-    # Actualiza los datos del producto
     product['name'] = request.json['name']
     product['price'] = request.json['price']
     product['quantity'] = request.json['quantity']
-
-    # Devuelve una respuesta exitosa
     return jsonify({
         "message": "Product Updated",
         "product": product
+    })
+
+# Ruta para eliminar un productos
+# Ruta para eliminar un producto
+@app.route('/products/<string:product_name>', methods=['DELETE'])
+def deleteProduct(product_name):
+    product_found = [product for product in products if product['name'] == product_name]
+    if not product_found:
+        return jsonify({"message": "Product Not Found"}), 404
+    products.remove(product_found[0])
+    return jsonify({
+        "message": "Product Deleted",
+        "products": products
     })
 
 if __name__ == "__main__":
