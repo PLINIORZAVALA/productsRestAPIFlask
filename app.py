@@ -25,5 +25,10 @@ def getProduct(product_name):
         return jsonify({"product": productFound[0]})
     return jsonify({"message": "Product not found"})
 
+# Ruta con metodo POST para agregar productos
+@app.route('/products', methods = ['POST'])
+def addProduct():
+    return 'received'
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
