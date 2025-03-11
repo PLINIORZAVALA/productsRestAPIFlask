@@ -17,11 +17,13 @@ def get_json():
 def get_products():
     return jsonify({"products": products, "message": "Lista de productos"})#objeto con lista de productos
 
-# Ruta para obtener un solo datos del archivo json
+# Ruta para obtener un solo dato del archivo json
 @app.route('/products/<string:product_name>', methods=['GET'])
 def getProduct(product_name):
-    print(product_name)
-    return 'received'
+    productFound = [product for product in products if product['name'] == product_name]
+    if (len(productFound) > 0):
+        return jsonify({"product": productFound[0]})
+    return jsonify({"message": "Product not found"})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
