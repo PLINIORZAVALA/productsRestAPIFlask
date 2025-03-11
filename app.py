@@ -7,10 +7,15 @@ app = Flask(__name__)
 def ping():
     return "¡Hola, Mundo! Esta es mi primera aplicación Flask."
 
+# Ruta para obtener los datos del json
+@app.route('/json', methods=['GET'])
+def get_json():
+    return jsonify({"message": "pong!"})
+
 # Ruta para obtener todos los productos
 @app.route('/products', methods=['GET'])
 def get_products():
-    return jsonify({"message": "pong!"})
+    return jsonify(products)
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
