@@ -36,5 +36,33 @@ def addProduct():
     products.append(new_product)
     return jsonify({"message": "Product Added Succesfully", "products": products})
 
+# Ruta para actualizar los datos de un producto
+@app.route('/products/<string:product_name>', methods=['PUT'])
+def editProduct(product_name):
+    # Busca el producto en la lista `products`
+    product_found = [product for product in products if product['name'] == product_name]
+
+    # Si no se encuentra el producto, devuelve un error 404
+    if not product_found:
+        return jsonify({"message": "Product Not Found"}), 404
+
+    # Obtén el producto encontrado
+    product = product_found[0]
+
+    # Valida que los campos necesarios estén en el JSON de la solicitud
+    if not all(key in request.json for key in ['name', 'price', 'quantity']):
+        return jsonify({"message": "Missing required fields (name, price, quantity)"}), 400
+
+    # Actualiza los datos del producto
+    product['name'] = request.json['name']
+    product['price'] = request.json['price']
+    product['quantity'] = request.json['quantity']
+
+    # Devuelve una respuesta exitosa
+    return jsonify({
+        "message": "Product Updated",
+        "product": product
+    })
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
